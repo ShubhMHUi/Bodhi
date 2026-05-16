@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --animate-spin-slow: spin 12s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 8s ease-in-out infinite;
+  --animate-float-slower: float 10s ease-in-out infinite;
+  --animate-twinkle: twinkle 3s ease-in-out infinite alternate;
+  --animate-pulse-slow: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-fly-slow: fly 15s linear infinite;
+  --animate-shooting-star: shooting-star 5s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  @keyframes twinkle {
+    0% { opacity: 0.2; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.1); }
+  }
+  @keyframes fly {
+    0% { transform: translate(100vw, 0) scaleX(-1); }
+    100% { transform: translate(-100vw, -100px) scaleX(-1); }
+  }
+  @keyframes shooting-star {
+    0% { transform: translate(0, 0) rotate(-45deg); opacity: 1; }
+    20% { transform: translate(-300px, 300px) rotate(-45deg); opacity: 0; }
+    100% { opacity: 0; }
+  }
+}
