@@ -57,7 +57,9 @@ const shufflePattern = <T>(array: T[]): T[] => {
   const newArr = [...array];
   for (let i = newArr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+    const temp = newArr[i] as T;
+    newArr[i] = newArr[j] as T;
+    newArr[j] = temp;
   }
   return newArr;
 };
@@ -88,7 +90,7 @@ const initLevel = () => {
   let attempt = 0;
   while (
     attempt < 5 &&
-    leftSideElements.value.every((el, i) => el.id === rightSideElements.value[i].id)
+    leftSideElements.value.every((el, i) => el.id === rightSideElements.value[i]?.id)
   ) {
     rightSideElements.value = shufflePattern(currentLevel.value.pairs);
     attempt++;
@@ -147,6 +149,8 @@ const checkPairSequence = () => {
 };
 
 const checkWinCondition = () => {
+  if (!currentLevel.value) return;
+
   if (matchedPairIds.value.length === currentLevel.value.pairs.length) {
     status.value = "level_complete";
     setTimeout(() => {

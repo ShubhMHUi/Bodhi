@@ -108,6 +108,8 @@ const playAudioSim = () => {
 };
 
 const fallbackSpeechSynthesis = () => {
+  if (!currentLevel.value) return;
+
   // Use the browser's native text-to-speech to artificially generate our "Animal Sound"
   if ("speechSynthesis" in window) {
     const utterance = new SpeechSynthesisUtterance(currentLevel.value.soundText);
@@ -137,7 +139,7 @@ const fallbackSpeechSynthesis = () => {
 
 // Selection Logic
 const selectOption = (id: number) => {
-  if (status.value === "correct" || status.value === "game_won") return;
+  if (status.value === "correct" || status.value === "game_won" || !currentLevel.value) return;
 
   selectedAnswer.value = id;
 
